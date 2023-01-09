@@ -9,7 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-  
+    "serverless": "^3.26.0",
     "uuid": "^9.0.0"
   },
   "devDependencies": {

@@ -37,6 +37,14 @@ functions:
       - httpApi:
           path: /fetchdata/{id}
           method: put
+  
+  deleteTodo:
+    handler: src/deleteTodo.handler
+    events:
+      - httpApi:
+          path: /fetchdata/{id}
+          method: delete
+
 
 resources:
   Resources:

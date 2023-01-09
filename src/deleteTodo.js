@@ -1,37 +1,31 @@
 const AWS=require("aws-sdk")
 const dynamodb=new AWS.DynamoDB.DocumentClient()
 
-const updateTodo=async(event)=>
+const deleteTodo=async(event)=>
 {
     try{
          
-        const { completed }=JSON.parse(event.body)
-        const { id }=event.pathParameters
-      let updatedata=  await dynamodb.update({
+        const {id}=event.pathParameters
+        await dynamodb.delete({
             TableName:"TodoTable",
             Key:{
                 id
             },
-            UpdateExpression:' set completed = :completed',
-            ExpressionAttributeValues: {
-                ':completed': completed
-            },
-            ReturnValues:"ALL_NEW"
+          
         }).promise()
     }catch(err){
         throw err
     }
-   
 }
 
 exports.handler=async(event)=>
 {
     try{
-        await updateTodo(event)
+        await deleteTodo(event)
         return {
             statusCode:200,
            
-            body: JSON.stringify("updated"),
+            body: JSON.stringify("item deleted"),
         };
     }catch(err)
     {
